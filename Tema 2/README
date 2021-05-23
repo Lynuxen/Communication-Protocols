@@ -1,0 +1,32 @@
+DIMOVSKI KIRJAN 322CB
+TEMA 2 PROTOCOALE DE COMUNICATII
+
+When a subscriber requests a connection to the server (i == sock_fd) I
+automatically append their ID and check the ID.
+
+Exit codes:
+
+-exit 1: The ID is above 10 characters
+-exit 2: The ID is already in use
+
+These are sent back at the subscriber refusing the connection
+and stating why. Exit 0 is used for when the server gracefully
+exits. If the ID is valid then I check if its an existing
+subscriber and update their fields, as well as sending the
+messages that they recieved while they were offline. If not, then
+they are added to the database.
+
+When (i == sock_fd_udp) it means I receive an UDP message. I parse it,
+send it to those that are subscribed and also store it in the database
+should they be offline and have the flag set to 1 for that topic.
+recvfrom() was used here to get the IP and the port. 
+
+If (i == 0) then the server takes commands. Exit will close all
+connections to subscribers, closing them as well, as well as deleting
+the database.
+
+The rest is messages from the TCP client. If recv == 0, that means that
+the server crashed or, viceversa, the subscriber. If it was the subscriber
+then his information is updated to not cause issues down the line.
+
+

@@ -1,0 +1,24 @@
+DIMOVSKI KIRJAN 322CB
+Tema 3
+
+I implemented the homework using the 10th lab as well as the Parson API.
+
+Parson was used for creating payloads as well as printing them in
+a more user-friendly way.
+
+I also added the function "compute_delete_request" in requests.c to
+implement the delete_book function.
+
+If the request is valid and has succeded, a prompt will inform the user
+of it. For example, for "login", if it was succesful, it will print
+"Logged in!".  Otherwise, errors will be printed using Parson to avoid
+the curly brackets and quotes, i.e. 
+
+"{"error:","Authorization header is missing!"}"
+
+will be printed as
+
+"Error: Authorization..."
+
+get_book and get_books will display information either tabbed or
+alligned.
